@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('angularRestfulAuth')
-    .controller('HomeCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'Main', function($rootScope, $scope, $location, $localStorage, Main) {
+angular
+.module('angularRestfulAuth')
+.controller('HomeCtrl', ['$scope', '$localStorage', 'Main', function($scope, $localStorage, Main) {
         $scope.signin = function() {
             var formData = {
                 username: $scope.username,
@@ -17,7 +18,7 @@ angular.module('angularRestfulAuth')
                     window.location = '/#/preview';
                 }
             }, function() {
-                $rootScope.error = 'Failed to signin';
+                $scope.error = 'Failed to signin';
             });
         };
 
@@ -63,9 +64,8 @@ angular.module('angularRestfulAuth')
         };
 
         $scope.token = $localStorage.token;
-    }])
-.controller('AgoraPreviewCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'Main',
-    function($rootScope, $scope, $location, $localStorage, Main) {
+}])
+.controller('AgoraPreviewCtrl', ['$scope', '$localStorage', 'Main', function($scope, $localStorage, Main) {
         function setSelected(arr, selected) {
             for (var i = 0; i < arr.length; i++) {
                 arr[i] = selected == i;
@@ -108,7 +108,6 @@ angular.module('angularRestfulAuth')
         }
 
     }])
-.controller('MeCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'Main',
-    function($rootScope, $scope, $location, $localStorage, Main) {
+.controller('MeCtrl', ['$scope', '$localStorage', 'Main', function($scope, $localStorage, Main) {
         $scope.currentUser = Main.getUserFromToken($localStorage.token);
-    }]);
+}]);
