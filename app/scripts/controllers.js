@@ -1,8 +1,13 @@
 'use strict';
 
-angular
-.module('angularRestfulAuth')
-.controller('HomeCtrl', ['$scope', '$localStorage', 'Main', function($scope, $localStorage, Main) {
+function setSelected(arr, selected) {
+    for (var i = 0; i < arr.length; i++) {
+        arr[i] = selected == i;
+    }
+}
+
+angular.module('angularRestfulAuth').
+controller('HomeCtrl', ['$scope', '$localStorage', 'Main', function($scope, $localStorage, Main) {
         $scope.signin = function() {
             var formData = {
                 username: $scope.username,
@@ -64,50 +69,79 @@ angular
         };
 
         $scope.token = $localStorage.token;
-}])
-.controller('AgoraPreviewCtrl', ['$scope', '$localStorage', 'Main', function($scope, $localStorage, Main) {
-        function setSelected(arr, selected) {
-            for (var i = 0; i < arr.length; i++) {
-                arr[i] = selected == i;
-            }
-        }
+}]).
+controller('AgoraPreviewCtrl', ['$scope', '$localStorage', 'Main', function($scope, $localStorage, Main) {
+    var currentUser = Main.getUserFromToken($localStorage.token);
+    $scope.currentUser = currentUser;
 
-        // if ($rootScope.)
-        var currentUser = Main.getUserFromToken($localStorage.token);
-        $scope.currentUser = currentUser;
-        if (typeof currentUser !== 'undefined') {
-            var pageContent = '/partials/agora';
-            var focus = [true, false, false, false, false];
+    if (typeof currentUser !== 'undefined') {
+        var pageContent = '/partials/agora';
+        var focus = [true, false, false, false, false];
 
-            if (window.location.href.indexOf('about') > -1) {
-                pageContent += '/about.html';
-                setSelected(focus, 4);
-                $scope.canEdit = true;
-            } else if (window.location.href.indexOf('contact') > -1) {
-                pageContent += '/contact.html';
-                setSelected(focus, 3);
-                $scope.canEdit = true;
-            } else if (window.location.href.indexOf('resume') > -1) {
-                pageContent += '/resume.html';
-                setSelected(focus, 2);
-                $scope.canEdit = true;
-            } else if (window.location.href.indexOf('portfolio') > -1) {
-                pageContent += '/portfolio.html';
-                setSelected(focus, 1);
-                $scope.canEdit = false;
-            } else {
-                pageContent += '/home.html';
-                setSelected(focus, 0);
-                $scope.canEdit = true;
-            }
-
-            $scope.pageContent = pageContent;
-            $scope.focus = focus;
+        if (window.location.href.indexOf('about') > -1) {
+            pageContent += '/about.html';
+            setSelected(focus, 4);
+            $scope.canEdit = true;
+        } else if (window.location.href.indexOf('contact') > -1) {
+            pageContent += '/contact.html';
+            setSelected(focus, 3);
+            $scope.canEdit = true;
+        } else if (window.location.href.indexOf('resume') > -1) {
+            pageContent += '/resume.html';
+            setSelected(focus, 2);
+            $scope.canEdit = true;
+        } else if (window.location.href.indexOf('portfolio') > -1) {
+            pageContent += '/portfolio.html';
+            setSelected(focus, 1);
+            $scope.canEdit = false;
         } else {
-            window.location = '/#/signin';
+            pageContent += '/home.html';
+            setSelected(focus, 0);
+            $scope.canEdit = true;
         }
 
-    }])
-.controller('MeCtrl', ['$scope', '$localStorage', 'Main', function($scope, $localStorage, Main) {
-        $scope.currentUser = Main.getUserFromToken($localStorage.token);
+        $scope.pageContent = pageContent;
+        $scope.focus = focus;
+    } else {
+        window.location = '/#/signin';
+    }
+
+}]).
+controller('MeCtrl', ['$scope', '$localStorage', 'Main', function($scope, $localStorage, Main) {
+    $scope.currentUser = Main.getUserFromToken($localStorage.token);
+}]).
+controller('DashboardCtrl', ['$scope', '$localStorage', 'Main', function($scope, $localStorage, Main) {
+    var currentUser = Main.getUserFromToken($localStorage.token);
+    $scope.currentUser = currentUser;
+
+    if (typeof currentUser !== 'undefined') {
+        var pageContent = '/partials/dashboard';
+        var focus = [true, false, false, false, false];
+
+        if (window.location.href.indexOf('account') > -1) {
+            pageContent += '/account.html';
+            setSelected(focus, 4);
+            $scope.canEdit = true;
+        } else if (window.location.href.indexOf('assignments') > -1) {
+            pageContent += '/assignments.html';
+            setSelected(focus, 3);
+            $scope.canEdit = true;
+        } else if (window.location.href.indexOf('classes') > -1) {
+            pageContent += '/classes.html';
+            setSelected(focus, 2);
+            $scope.canEdit = true;
+        } else if (window.location.href.indexOf('semesters') > -1) {
+            pageContent += '/semesters.html';
+            setSelected(focus, 1);
+            $scope.canEdit = false;
+        } else {
+            pageContent += '/home.html';
+            setSelected(focus, 0);
+            $scope.canEdit = true;
+        }
+        $scope.pageContent = pageContent;
+        $scope.focus = focus;
+    } else {
+        window.location = '/#/signin';
+    }
 }]);

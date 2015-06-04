@@ -19,6 +19,14 @@ angular.module('angularRestfulAuth', [
             templateUrl: 'partials/me.html',
             controller: 'MeCtrl'
         }).
+        when('/dashboard', {
+            templateUrl: 'partials/dashboard.html',
+            controller: 'DashboardCtrl'
+        }).
+        when('/dashboard/:pageOrName', {
+            templateUrl: 'partials/dashboard.html',
+            controller: 'DashboardCtrl'
+        }).
         when('/preview', {
             templateUrl: 'partials/preview.html',
             controller: 'AgoraPreviewCtrl'
