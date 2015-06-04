@@ -41,7 +41,7 @@ angular.module('angularRestfulAuth')
                 $http.post(baseUrl + '/register', data).success(success).error(error);
             },
             signin: function(data, success, error) {
-                $http.post(baseUrl + '/authentication', data).success(success).error(error);
+                $http.post(baseUrl + '/signin', data).success(success).error(error);
             },
             me: function(data, success, error) {
                 $http.get(baseUrl + '/me').success(success).error(error);
