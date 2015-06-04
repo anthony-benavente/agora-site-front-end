@@ -13,8 +13,6 @@ angular.module('angularRestfulAuth')
                     alert(res.data);
                 } else {
                     Main.changeUser(Main.getUserFromToken($localStorage.token));
-                    $localStorage.token = res.data.token;
-                    $scope.token = res.data.token;
                     window.location = '/#/me';
                 }
             }, function() {
@@ -74,7 +72,7 @@ angular.module('angularRestfulAuth')
         }
 
         // if ($rootScope.)
-        var currentUser = Main.getUserFromToken($scope.token);
+        var currentUser = Main.getUserFromToken($localStorage.token);
         $scope.currentUser = currentUser;
         if (typeof currentUser !== 'undefined') {
             var pageContent = '/partials/agora';
