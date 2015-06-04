@@ -12,6 +12,7 @@ angular.module('angularRestfulAuth')
                 if (res.type == false) {
                     alert(res.data);
                 } else {
+                    $localStorage.token = res.data.token;
                     Main.changeUser(Main.getUserFromToken($localStorage.token));
                     window.location = '/#/preview';
                 }
