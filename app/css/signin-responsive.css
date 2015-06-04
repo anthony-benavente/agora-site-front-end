@@ -1,0 +1,8 @@
+@media screen and (max-width: 600px) {
+    body {
+        margin: 0;
+    }
+    #login-panel {
+        width: 100%;
+    }
+}

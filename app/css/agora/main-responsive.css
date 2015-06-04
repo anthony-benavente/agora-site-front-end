@@ -1,0 +1,21 @@
+@media screen and (max-width: 992px) {
+    #nav-wrapper,
+    .container {
+        width: 100%;
+    }
+    .responsive-show {
+        display: block;
+    }
+    .responsive-hide {
+        display: none;
+    }
+}
+
+@media screen and (min-width:  992px) {
+    .responsive-hide {
+        display: block;
+    }
+    .responsive-show {
+        display: none;
+    }
+}

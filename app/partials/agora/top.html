@@ -1,0 +1,26 @@
+<div id="title">
+    <h1><a class="brand" href="index.html">{{currentUser.name}}</a></h1>
+</div>
+<div id="nav-wrapper">
+    <div class="navbar navbar-default" id="navbar-menu" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li ng-class="{ active: focus[0] }"><a href="#/me">Home</a></li>
+            <li ng-class="{ active: focus[1] }"><a href="#/me/portfolio.html">Portfolio</a></li>
+            <li ng-class="{ active: focus[2] }"><a href="#/me/resume.html">Resume</a></li>
+            <li ng-class="{ active: focus[3] }"><a href="#/me/contact.html">Contact</a></li>
+            <li ng-class="{ active: focus[4] }"><a href="#/me/about.html">About</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+</div>

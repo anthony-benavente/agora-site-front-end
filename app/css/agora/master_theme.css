@@ -1,0 +1,93 @@
+﻿body {
+  padding-top: 20px;
+  padding-bottom: 30px;
+  background: #eee;
+}
+
+.theme-dropdown .dropdown-menu {
+  position: static;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.theme-showcase > p > .btn {
+    margin: 5px 0;
+}
+
+.navbar {
+	border: 0px solid black;
+}
+
+#nav-wrapper {
+	width: 80%;
+	background: #f8f8f8;
+	border: 1px solid #e7e7e7;
+	margin:0 auto;
+	border-radius: 5px;
+}
+
+#header-title {
+	border-bottom: 1px solid #e7e7e7;
+}
+
+#navbar-menu {
+	margin: 0;
+	border-bottom: 1px solid #e7e7e7;
+}
+
+#footer {
+	display:block;
+	text-align:center;
+	margin-bottom: 15px;
+}
+
+div#title {
+    width: 80%;
+    margin: 0 auto;
+}
+
+
+div#title a,
+div#title a:visited,
+div#title a:hover {
+	width: 80%;
+	margin: 0 auto;
+    color: black;
+}
+
+.container {
+	width: 80%;
+	padding-top:30px;
+	padding-bottom: 30px;
+	background: #fff;
+}
+
+footer 
+{
+    text-align:center;
+}
+
+footer small 
+{
+    color:#aaa;
+}
+
+.navbar-btn 
+{
+    margin-right: 10px;
+}
+
+.table-display 
+{
+    display: table;
+    text-align:center;
+    margin:5px 20px 0px 0px;
+    line-height: 15px;
+    height:40px;
+}
+
+.v-align 
+{
+    display: table-cell;
+    vertical-align: middle;
+}

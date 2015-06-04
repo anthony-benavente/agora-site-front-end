@@ -1,0 +1,142 @@
+@import url('main-responsive.css');
+
+@font-face {
+    font-family: MyriadPro;
+    src: url(../res/fonts/myriad-pro/MYRIADPRO-REGULAR.OTF);
+}
+
+@font-face {
+    font-family: MyriadPro;
+    font-weight: bold;
+    src: url(../res/fonts/myriad-pro/MYRIADPRO-BOLD.OTF);
+}
+
+@font-face {
+    font-family: LeagueGothic;
+    src: url(../res/fonts/league-gothic/LeagueGothic-Regular.otf);
+}
+
+@font-face {
+    font-family: LeagueGothic;
+    font-style: italic;
+    src: url(../res/fonts/league-gothic/LeagueGothic-Italic.otf);
+}
+
+* {
+    font-family: MyriadPro, Arial, Sans-serif;
+}
+
+body {
+    margin: 0 auto;
+}
+
+.header {
+    height: 100px;
+    padding: 5px;
+    display: table;
+}
+.panel {
+    padding: 0;
+}
+
+.header .title {
+    text-align: left;
+    font-size: 24pt;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.header .title a {
+    color: black;
+    text-decoration: none;
+}
+
+.header .title a:hover {
+    text-decoration: underline;
+}
+
+.nav-bar {
+    height: 40px;
+    width: 100%;
+    border: 1px solid lightgray;
+    border-radius: 17px;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.nav-bar ul {
+    list-style-type: none;
+    margin: 10px 0 0 10px;
+    padding: 0;
+}
+
+.nav-bar ul li {
+    display: inline-block;
+    width: 130px;
+    text-align: center;
+}
+
+.nav-bar ul li a {
+    width: 130px;
+    text-decoration: none;
+    color: black;
+}
+
+.nav-bar ul li a.selected {
+    font-size: 23px;
+    text-decoration: underline;
+}
+
+.nav-bar ul li a:hover,
+.nav-bar ul li a:visited {
+    color: black;
+}
+
+.nav-bar ul li a:hover {
+    text-decoration: underline;
+}
+
+.content .container {
+    min-height: 150px;
+    margin-bottom: 20px;
+    padding: 20px 50px 50px 20px;
+}
+
+.container #content-title,
+.content #content-title {
+    font-size: 18pt;
+}
+.clear {
+    clear: both;
+}
+
+.container #content-sub-title,
+.content #content-sub-title {
+    font-size: 14pt;
+}
+
+.container #content-sub-sub-title,
+.content #content-sub-sub-title {
+    font-size: 13pt;
+    font-style: italic;
+}
+
+.container p.no-content,
+.content p.no-content {
+    color: gray;
+    text-align: center;
+    margin-top: 75px;
+}
+
+.footer {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.footer span {
+    color: gray;
+}
+img {
+    border: 1px solid lightgray;
+    box-shadow: 3px 3px 3px #aaa;
+}

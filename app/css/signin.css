@@ -1,0 +1,20 @@
+/* DOM Selectors */
+body {
+    margin: 10px;
+}
+
+/* Class selectors */
+.box {
+    width: 370px;
+    height: auto;
+}
+
+.box-lg {
+    width: 600px;
+    height: auto;
+}
+
+/* ID selectors */
+#login-panel {
+    margin: 0 auto;
+}

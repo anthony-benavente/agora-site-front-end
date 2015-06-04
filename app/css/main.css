@@ -1,0 +1,11 @@
+@import url('main-responsive.css');
+
+.clear {
+    clear: both;
+}
+
+span.warning {
+    font-size: 14px;
+    color: red;
+    display: block;
+}
