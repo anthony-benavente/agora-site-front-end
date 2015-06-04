@@ -12,9 +12,10 @@ angular.module('angularRestfulAuth')
                 if (res.type == false) {
                     alert(res.data);
                 } else {
-                    $localStorage.token = res.data.token;
                     Main.changeUser(Main.getUserFromToken($localStorage.token));
-                    window.location = '/';
+                    $localStorage.token = res.data.token;
+                    $scope.token = res.data.token;
+                    window.location = '/#/me';
                 }
             }, function() {
                 $rootScope.error = 'Failed to signin';
