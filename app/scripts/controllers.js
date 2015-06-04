@@ -113,7 +113,11 @@ controller('MeCtrl', ['$scope', '$localStorage', 'Main', function($scope, $local
 controller('DashboardCtrl', ['$scope', '$localStorage', 'Main', function($scope, $localStorage, Main) {
     var currentUser = Main.getUserFromToken($localStorage.token);
     $scope.currentUser = currentUser;
-
+    $scope.years = [];
+    for (var i = 2000; i < 2020; i++) {
+        $scope.years.push(i);
+    }
+    $scope.semesters = ['Fall', 'Spring', 'Summer']
     if (typeof currentUser !== 'undefined') {
         var pageContent = '/partials/dashboard';
         var focus = [true, false, false, false, false];
@@ -121,27 +125,55 @@ controller('DashboardCtrl', ['$scope', '$localStorage', 'Main', function($scope,
         if (window.location.href.indexOf('account') > -1) {
             pageContent += '/account.html';
             setSelected(focus, 4);
-            $scope.canEdit = true;
         } else if (window.location.href.indexOf('assignments') > -1) {
             pageContent += '/assignments.html';
             setSelected(focus, 3);
-            $scope.canEdit = true;
         } else if (window.location.href.indexOf('classes') > -1) {
             pageContent += '/classes.html';
             setSelected(focus, 2);
-            $scope.canEdit = true;
         } else if (window.location.href.indexOf('semesters') > -1) {
             pageContent += '/semesters.html';
             setSelected(focus, 1);
-            $scope.canEdit = false;
+        } else if (window.location.href.indexOf('class') > -1) {
+            pageContent += '/class.html';
+            setSelected(focus, 2);
         } else {
             pageContent += '/home.html';
             setSelected(focus, 0);
-            $scope.canEdit = true;
         }
         $scope.pageContent = pageContent;
         $scope.focus = focus;
     } else {
         window.location = '/#/signin';
     }
-}]);
+}]).
+controller('DashboardClassesCtrl', ['$scope', '$localStorage', 'Main', function($scope, $localStorage, Main) {
+    function initScope() {
+        $scope.currentUser = Main.getUserFromToken($localStorage.token);
+        $scope.years = [];
+        $scope.semesters = ['Fall', 'Spring', 'Summer'];
+        $scope.newClass = {};
+        for (var i = 1995; i <= new Date(Date.now()).getFullYear(); i++) {
+            years.push(i);
+        }
+
+        Main.getPrograms($localStorage.token, function(data) {
+            $scope.programs = data;
+        }, function() {
+            $scope.programs = []
+        });
+    }
+
+    function saveClass() {
+        var toSave = {
+            className: $scope.newClass.name,
+            programId: 3,
+            courseCode: $scope.newClass.courseCode,
+            semester: $scope.newClass.semester,
+            year: $scope.newClass.year
+        };
+        alert(JSON.stringify(toSave));
+    }
+
+    initScope();
+});

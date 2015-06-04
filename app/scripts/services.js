@@ -4,6 +4,10 @@ angular.module('angularRestfulAuth')
     .factory('Main', ['$http', '$localStorage', function($http, $localStorage) {
         var baseUrl = 'http://localhost:3000/api';
 
+        function setAuth(token) {
+            $httpProvider.defaults.headers.common.Authorization = 'Basic ' + token;
+        }
+
         function changeUser(user) {
             angular.extend(currentUser, user);
         }
@@ -50,6 +54,10 @@ angular.module('angularRestfulAuth')
                 changeUser({});
                 delete $localStorage.token;
                 success();
+            },
+            getPrograms: function(token, success, err) {
+                setAuth(token);
+                $http.get(baseUrl + '/programs').success(success).error(err);
             },
             getUserFromToken: getUserFromToken,
             changeUser: changeUser
