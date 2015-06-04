@@ -17,10 +17,14 @@ angular.module('angularRestfulAuth', [
         }).
         when('/me', {
             templateUrl: 'partials/me.html',
+            controller: 'MeCtrl'
+        }).
+        when('/preview', {
+            templateUrl: 'partials/preview.html',
             controller: 'AgoraPreviewCtrl'
         }).
-        when('/me/:pageOrName', {
-            templateUrl: 'partials/me.html',
+        when('/preview/:pageOrName', {
+            templateUrl: 'partials/preview.html',
             controller: 'AgoraPreviewCtrl'
         }).
         otherwise({

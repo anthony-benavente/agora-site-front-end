@@ -13,7 +13,7 @@ angular.module('angularRestfulAuth')
                     alert(res.data);
                 } else {
                     Main.changeUser(Main.getUserFromToken($localStorage.token));
-                    window.location = '/#/me';
+                    window.location = '/#/preview';
                 }
             }, function() {
                 $rootScope.error = 'Failed to signin';
@@ -106,4 +106,8 @@ angular.module('angularRestfulAuth')
             window.location = '/#/signin';
         }
 
+    }])
+.controller('MeCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'Main',
+    function($rootScope, $scope, $location, $localStorage, Main) {
+        $scope.currentUser = Main.getUserFromToken($localStorage.token);
     }]);
