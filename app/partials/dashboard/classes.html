@@ -1,25 +1,40 @@
 <fieldset class="form-horizontal">
     <legend>New Class</legend>
     <div class="form-group">
+        <label for="program" class="col-sm-1 control-label">Program:</label>
+        <div class="col-sm-3">
+            <select name="program"
+                    class="form-control"
+                    ng-model="newClass.program"
+                    ng-options="p.programId as p.shortCode + ' \(' + p.programName + '\)' for p in programs"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="courseCode" class="col-sm-1 control-label">Code:</label>
+        <div class="col-sm-3">
+            <input type="number" name="courseCode" class="form-control" ng-model="newClass.courseCode">
+        </div>
+    </div>
+    <div class="form-group">
         <label for="name" class="col-sm-1 control-label">Name:</label>
-        <div class="col-sm-2">
-            <input type="text" class="form-control" ng-model="newClass.name">
+        <div class="col-sm-3">
+            <input type="text" name="name" class="form-control" ng-model="newClass.name">
         </div>
     </div>
     <div class="form-group">
         <label for="semester" class="col-sm-1 control-label">Semester:</label>
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <select class="form-control" ng-model="newSemester.semester" ng-options="s as s for s in semesters"></select>
         </div>
     </div>
     <div class="form-group">
         <label for="year" class="col-sm-1 control-label">Year:</label>
-        <div class="col-sm-2">
-            <select class="form-control" ng-model="newSemester.year" ng-options="year as year for year in years"></select>
+        <div class="col-sm-3">
+            <select class="form-control" ng-model="newSemester.year" ng-options="year for year in years"></select>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-offset-1 col-sm-2">
+        <div class="col-sm-offset-1 col-sm-3">
             <button type="button" class="btn btn-primary">Submit</button>
         </div>
     </div>

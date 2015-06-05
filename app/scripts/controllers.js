@@ -1,5 +1,7 @@
 'use strict';
 
+var CLASSES_TAB = 2;
+
 function setSelected(arr, selected) {
     for (var i = 0; i < arr.length; i++) {
         arr[i] = selected == i;
@@ -151,10 +153,13 @@ controller('DashboardClassesCtrl', ['$scope', '$localStorage', 'Main', function(
     function initScope() {
         $scope.currentUser = Main.getUserFromToken($localStorage.token);
         $scope.years = [];
+        $scope.focus = {};
         $scope.semesters = ['Fall', 'Spring', 'Summer'];
         $scope.newClass = {};
-        for (var i = 1995; i <= new Date(Date.now()).getFullYear(); i++) {
-            years.push(i);
+        $scope.pageContent = '/partials/dashboard/classes.html';
+        var thisYear = new Date(Date.now()).getFullYear();
+        for (var i = thisYear; i >= thisYear - 15; i--) {
+            $scope.years.push(i);
         }
 
         Main.getPrograms($localStorage.token, function(data) {
@@ -162,6 +167,9 @@ controller('DashboardClassesCtrl', ['$scope', '$localStorage', 'Main', function(
         }, function() {
             $scope.programs = []
         });
+
+        // Makes the class tab item in the menu focused
+        $scope.focus[CLASSES_TAB] = true;
     }
 
     function saveClass() {
@@ -176,4 +184,4 @@ controller('DashboardClassesCtrl', ['$scope', '$localStorage', 'Main', function(
     }
 
     initScope();
-});
+}]);

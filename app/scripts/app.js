@@ -23,9 +23,9 @@ angular.module('angularRestfulAuth', [
             templateUrl: 'partials/dashboard.html',
             controller: 'DashboardCtrl'
         }).
-        when('/dashboard/semesters', {
+        when('/dashboard/classes', {
             templateUrl: 'partials/dashboard.html',
-            controller: 'DashboardSemesterCtrl'
+            controller: 'DashboardClassesCtrl'
         }).
         when('/preview', {
             templateUrl: 'partials/preview.html',
