@@ -16,6 +16,12 @@ app.get("/", function(req, res) {
 });
 
 // Start Server
-app.listen(port, function () {
-    console.log( "Express server listening on port " + port);
+var server = app.listen(port, function (err) {
+    if (err) {
+        console.log(err);
+    } else {
+        var host = server.address().address;
+        var port = server.address().port;
+        console.log( "Server listening at http://%s:%s", host, port);
+    }
 });
