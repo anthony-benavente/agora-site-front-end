@@ -2,7 +2,7 @@
 
 angular.module('angularRestfulAuth')
     .factory('Main', ['$http', '$localStorage', function($http, $localStorage) {
-        var baseUrl = 'http://localhost:3000/api';
+        var baseUrl = 'http://localhost:3000/api/users';
 
         function buildRequest(method, url, data, token) {
             var requestData = {
