@@ -2,7 +2,7 @@
 
 angular.module('angularRestfulAuth')
     .factory('Main', ['$http', '$localStorage', function($http, $localStorage) {
-        var baseUrl = 'http://localhost:3000/api/users';
+        var baseUrl = 'http://localhost:3000/api';
 
         function buildRequest(method, url, data, token) {
             var requestData = {
@@ -79,6 +79,10 @@ angular.module('angularRestfulAuth')
                 ]);
             },
             getUserFromToken: getUserFromToken,
-            changeUser: changeUser
+            changeUser: changeUser,
+            getClasses: function(token, success, err) {
+                console.log(token);
+                $http.get(baseUrl + '/classes/').success(success).error(err);
+            }
         }
     }]);

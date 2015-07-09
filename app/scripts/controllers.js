@@ -152,7 +152,6 @@ controller('DashboardCtrl', ['$scope', '$localStorage', 'Main', function($scope,
 controller('DashboardClassesCtrl', ['$scope', '$localStorage', 'Main', function($scope, $localStorage, Main) {
     function initScope() {
         $scope.currentUser = Main.getUserFromToken($localStorage.token);
-        $scope.classes = [];
         $scope.years = [];
         $scope.focus = {};
         $scope.semesters = ['Fall', 'Spring', 'Summer'];
@@ -167,6 +166,12 @@ controller('DashboardClassesCtrl', ['$scope', '$localStorage', 'Main', function(
             $scope.programs = data;
         }, function() {
             $scope.programs = []
+        });
+
+        Main.getClasses($localStorage.token, function(data) {
+            $scope.classes = data.data;
+        }, function() {
+            $scope.classes = [];
         });
 
         // Makes the class tab item in the menu focused
