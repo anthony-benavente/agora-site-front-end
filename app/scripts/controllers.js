@@ -9,6 +9,17 @@ function setSelected(arr, selected) {
 }
 
 angular.module('angularRestfulAuth').
+controller('SignOutCtrl', ['$scope', '$localStorage', 'Main', function($scope, $localStorage, Main) {
+    $scope.logout = function() {
+        Main.logout(function() {
+            window.location = '#/signin';
+        }, function() {
+            alert('Failed to logout');
+        });
+    };
+
+    $scope.logout();
+}]).
 controller('HomeCtrl', ['$scope', '$localStorage', 'Main', function($scope, $localStorage, Main) {
         $scope.signin = function() {
             var formData = {
@@ -59,14 +70,6 @@ controller('HomeCtrl', ['$scope', '$localStorage', 'Main', function($scope, $loc
                 $scope.myDetails = res;
             }, function() {
                 $rootScope.error = 'Failed to fetch details';
-            });
-        };
-
-        $scope.logout = function() {
-            Main.logout(function() {
-                window.location = '/';
-            }, function() {
-                alert('Failed to logout');
             });
         };
 

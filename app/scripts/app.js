@@ -20,6 +20,10 @@ angular.module('angularRestfulAuth', [
             templateUrl: 'partials/signin.html',
             controller: 'HomeCtrl'
         }).
+        when('/signout', {
+            templateUrl: 'partials/signin.html',
+            controller: 'SignOutCtrl'
+        }).
         when('/register', {
             templateUrl: 'partials/register.html',
             controller: 'HomeCtrl'
