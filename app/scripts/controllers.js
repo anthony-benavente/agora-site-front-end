@@ -163,15 +163,19 @@ controller('DashboardClassesCtrl', ['$scope', '$localStorage', 'Main', function(
         }
 
         Main.getPrograms($localStorage.token, function(data) {
-            $scope.programs = data;
+            $scope.programs = data.data;
+            Main.getClasses($localStorage.token, function(classData) {
+                $scope.classes = classData.data;
+                for (var i = 0;  i < $scope.classes.length ;i++) {
+                    $scope.classes[i].program = $scope.programs.find(function(item) {
+                      return item.programId === $scope.classes[i].programId;
+                    });
+                }
+            }, function() {
+                $scope.classes = [];
+            });
         }, function() {
             $scope.programs = []
-        });
-
-        Main.getClasses($localStorage.token, function(data) {
-            $scope.classes = data.data;
-        }, function() {
-            $scope.classes = [];
         });
 
         // Makes the class tab item in the menu focused
@@ -187,9 +191,14 @@ controller('DashboardClassesCtrl', ['$scope', '$localStorage', 'Main', function(
             year: $scope.newClass.year,
             program: $scope.programs.find(function(item) {
               return item.programId === $scope.newClass.programId;
-            })
+          }),
+          professorId: $scope.currentUser.userId
         };
-        $scope.classes.push(toSave);
+        Main.saveClass(toSave, $localStorage.token, function(data) {
+            $scope.classes.push(toSave);
+        }, function(data) {
+
+        });
     };
 
     initScope();

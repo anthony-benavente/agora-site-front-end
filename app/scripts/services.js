@@ -64,25 +64,25 @@ angular.module('angularRestfulAuth')
                 success();
             },
             getPrograms: function(token, success, err) {
-                // $http('GET', baseUrl + '/programs', token).success(success).error(err);
-                success([
-                    {
-                        programId: 1,
-                        shortCode: 'CS',
-                        programName: 'Computer Science'
-                    },
-                    {
-                        programId: 2,
-                        shortCode: 'MATH',
-                        programName: 'Mathematics'
-                    }
-                ]);
+                $http.get(baseUrl + '/programs').success(success).error(err);
             },
             getUserFromToken: getUserFromToken,
             changeUser: changeUser,
             getClasses: function(token, success, err) {
-                console.log(token);
-                $http.get(baseUrl + '/classes/').success(success).error(err);
+                $http.get(baseUrl + '/classes/', {
+                    headers: {
+                        'Authorization': 'Basic ' + token
+                    }
+                }).success(success).error(err);
+            },
+            saveClass: function(data, token, success, err) {
+                console.log('Saving data...');
+                console.log(JSON.stringify(data));
+                $http.post(baseUrl + '/classes/', data, {
+                    headers: {
+                        'Authorization': 'Basic ' + token
+                    }
+                }).success(success).error(err);
             }
         }
     }]);
