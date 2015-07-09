@@ -40,7 +40,7 @@ angular.module('angularRestfulAuth')
         function getUserFromToken() {
             var token = $localStorage.token;
             var user = {};
-            if (typeof token !== 'undefined') {
+            if (typeof token === "string") {
                 var encoded = token.split('.')[1];
                 user = JSON.parse(urlBase64Decode(encoded));
             }
@@ -50,13 +50,13 @@ angular.module('angularRestfulAuth')
         var currentUser = getUserFromToken();
         return {
             register: function(data, success, error) {
-                $http.post(baseUrl + '/register', data).success(success).error(error);
+                $http.post(baseUrl + '/users/register', data).success(success).error(error);
             },
             signin: function(data, success, error) {
-                $http.post(baseUrl + '/signin', data).success(success).error(error);
+                $http.post(baseUrl + '/users/signin', data).success(success).error(error);
             },
             me: function(data, success, error) {
-                $http.get(baseUrl + '/me').success(success).error(error);
+                $http.get(baseUrl + '/users/me').success(success).error(error);
             },
             logout: function(success) {
                 changeUser({});
@@ -69,6 +69,7 @@ angular.module('angularRestfulAuth')
             getUserFromToken: getUserFromToken,
             changeUser: changeUser,
             getClasses: function(token, success, err) {
+                console.log(getUserFromToken(token));
                 $http.get(baseUrl + '/classes/', {
                     headers: {
                         'Authorization': 'Basic ' + token
