@@ -1,3 +1,12 @@
+Array.prototype.find = function(callback) {
+  for (var i = 0; i < this.length; i++) {
+    if (callback(this[i])) {
+      return i;
+    }
+  }
+  return null;
+};
+
 angular.module('angularRestfulAuth', [
     'ngStorage', 'ngRoute'
 ])

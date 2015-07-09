@@ -5,8 +5,9 @@
         <div class="col-sm-3">
             <select name="program"
                     class="form-control"
-                    ng-model="newClass.program"
-                    ng-options="p.programId as p.shortCode + ' \(' + p.programName + '\)' for p in programs"></select>
+                    ng-model="newClass.programId"
+                    ng-options="p.programId as p.shortCode + ' \(' + p.programName + '\)' for p in programs"
+                    ></select>
         </div>
     </div>
     <div class="form-group">
@@ -35,7 +36,24 @@
     </div>
     <div class="row">
         <div class="col-sm-offset-1 col-sm-3">
-            <button type="button" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-primary" ng-click="saveClass()">Submit</button>
         </div>
     </div>
 </fiedset>
+
+<table>
+  <thead>
+    <tr>
+      <th>Class Name</th>
+      <th>Semester</th>
+      <th>Year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="c in classes | orderBy: 'courseCode'">
+      <td>{{c.program.programCode}} - {{c.courseCode}}: {{c.name}}</td>
+      <td>{{c.semester}}</td>
+      <td>{{c.year}}</td>
+    </tr>
+  </tbody>
+</table>

@@ -152,6 +152,7 @@ controller('DashboardCtrl', ['$scope', '$localStorage', 'Main', function($scope,
 controller('DashboardClassesCtrl', ['$scope', '$localStorage', 'Main', function($scope, $localStorage, Main) {
     function initScope() {
         $scope.currentUser = Main.getUserFromToken($localStorage.token);
+        $scope.classes = [];
         $scope.years = [];
         $scope.focus = {};
         $scope.semesters = ['Fall', 'Spring', 'Summer'];
@@ -172,16 +173,19 @@ controller('DashboardClassesCtrl', ['$scope', '$localStorage', 'Main', function(
         $scope.focus[CLASSES_TAB] = true;
     }
 
-    function saveClass() {
+    $scope.saveClass = function() {
         var toSave = {
             className: $scope.newClass.name,
-            programId: 3,
+            programId: $scope.newClass.programId,
             courseCode: $scope.newClass.courseCode,
             semester: $scope.newClass.semester,
-            year: $scope.newClass.year
+            year: $scope.newClass.year,
+            program: $scope.programs.find(function(item) {
+              return item.programId === $scope.newClass.programId;
+            })
         };
-        alert(JSON.stringify(toSave));
-    }
+        $scope.classes.push(toSave);
+    };
 
     initScope();
 }]);
