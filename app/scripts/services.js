@@ -69,16 +69,22 @@ angular.module('angularRestfulAuth')
             getUserFromToken: getUserFromToken,
             changeUser: changeUser,
             getClasses: function(token, success, err) {
-                console.log(getUserFromToken(token));
                 $http.get(baseUrl + '/classes/', {
                     headers: {
                         'Authorization': 'Basic ' + token
                     }
                 }).success(success).error(err);
             },
+            getClass: function(classId, token, success, err) {
+                $http.get(baseUrl + '/classes/' + classId, {
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                }).success(success).error(err);
+            },
             saveClass: function(data, token, success, err) {
                 console.log('Saving data...');
-                console.log(JSON.stringify(data));
+                console.log(data);
                 $http.post(baseUrl + '/classes/', data, {
                     headers: {
                         'Authorization': 'Basic ' + token

@@ -152,6 +152,21 @@ controller('DashboardCtrl', ['$scope', '$localStorage', 'Main', function($scope,
         window.location = '/#/signin';
     }
 }]).
+controller('DashboardClassCtrl', ['$scope', '$localStorage', 'Main', function($scope, $localStorage, Main) {
+    function initScope() {
+        $scope.currentUser = Main.getUserFromToken($localStorage.token);
+        $scope.focus = {};
+        $scope.pageContent = '/partials/dashboard/class.html';
+        Main.getClass($routeParams.classId, classId, $localStorage.token, function(data) {
+            $scope.class = data.data;
+        }, function(err) {
+            $scope.class = {}
+        });
+    }
+    
+    // Makes the class tab item in the menu focused
+    $scope.focus[CLASSES_TAB] = true;
+}]).
 controller('DashboardClassesCtrl', ['$scope', '$localStorage', 'Main', function($scope, $localStorage, Main) {
     function initScope() {
         $scope.currentUser = Main.getUserFromToken($localStorage.token);

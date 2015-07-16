@@ -40,6 +40,10 @@ angular.module('angularRestfulAuth', [
             templateUrl: 'partials/dashboard.html',
             controller: 'DashboardClassesCtrl'
         }).
+        when('/dashboard/classes/:classId', {
+            templateUrl: 'partials/dashboard.html',
+            controller: 'DashboardClassCtrl'
+        }).
         when('/preview', {
             templateUrl: 'partials/preview.html',
             controller: 'AgoraPreviewCtrl'
