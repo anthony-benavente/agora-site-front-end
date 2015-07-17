@@ -1,59 +1,74 @@
 <fieldset class="form-horizontal">
-    <legend>New Class</legend>
-    <div class="form-group">
-        <label for="program" class="col-sm-1 control-label">Program:</label>
-        <div class="col-sm-3">
-            <select name="program"
-                    class="form-control"
-                    ng-model="newClass.programId"
-                    ng-options="p.programId as p.shortCode + ' \(' + p.programName + '\)' for p in programs"
-                    ></select>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="courseCode" class="col-sm-1 control-label">Code:</label>
-        <div class="col-sm-3">
-            <input type="number" name="courseCode" class="form-control" ng-model="newClass.courseCode">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="name" class="col-sm-1 control-label">Name:</label>
-        <div class="col-sm-3">
-            <input type="text" name="name" class="form-control" ng-model="newClass.name">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="semester" class="col-sm-1 control-label">Semester:</label>
-        <div class="col-sm-3">
-            <select class="form-control" ng-model="newClass.semester" ng-options="s as s for s in semesters"></select>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="year" class="col-sm-1 control-label">Year:</label>
-        <div class="col-sm-3">
-            <select class="form-control" ng-model="newClass.year" ng-options="year for year in years"></select>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-offset-1 col-sm-3">
-            <button type="button" class="btn btn-primary" ng-click="saveClass()">Submit</button>
-        </div>
-    </div>
+	<legend><a href="javascript:void(0);" id="newClassToggle">Create a new class <i id="newClassToggleIcon" class="fa fa-caret-down"></i></a></legend>
+	<div class="expandable" id="newClassForm">
+		<div class="form-group">
+			<label for="program" class="col-md-1 control-label">Program:</label>
+			<div class="col-md-3">
+				<select name="program" class="form-control" ng-model="newClass.programId" ng-options="p.programId as p.shortCode + ' \(' + p.programName + '\)' for p in programs"></select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="courseCode" class="col-md-1 control-label">Code:</label>
+			<div class="col-md-3">
+				<input type="number" name="courseCode" class="form-control" ng-model="newClass.courseCode">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="name" class="col-md-1 control-label">Name:</label>
+			<div class="col-md-3">
+				<input type="text" name="name" class="form-control" ng-model="newClass.name">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="semester" class="col-md-1 control-label">Semester:</label>
+			<div class="col-md-3">
+				<select class="form-control" ng-model="newClass.semester" ng-options="s as s for s in semesters"></select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="year" class="col-md-1 control-label">Year:</label>
+			<div class="col-md-3">
+				<select class="form-control" ng-model="newClass.year" ng-options="year for year in years"></select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-offset-1 col-md-3">
+				<button type="button" class="btn btn-primary" ng-click="saveClass()">Submit</button>
+			</div>
+		</div>
+	</div>
 </fiedset>
 
-<table>
-  <thead>
-    <tr>
-      <th>Class Name</th>
-      <th>Semester</th>
-      <th>Year</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="c in classes | orderBy: 'courseCode'">
-      <td>{{c.program.shortCode}} {{c.courseCode}} - {{c.className}}</td>
-      <td>{{c.semester}}</td>
-      <td>{{c.year}}</td>
-    </tr>
-  </tbody>
+<table class="responsive">
+	<thead>
+		<td>{{c.year}}</td>
+		<tr>
+			<th>Class Name</th>
+			<th>Semester</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="c in classes | orderBy: 'courseCode'">
+			<td>{{c.program.shortCode}} {{c.courseCode}} - {{c.className}}</td>
+			<td>{{c.semester}} {{c.year}}</td>
+		</tr>
+	</tbody>
 </table>
+
+<script type="text/javascript">
+$('#newClassToggle').click(function() {
+    var icon = $('#newClassToggleIcon');
+
+    if (icon.hasClass('fa-caret-up')) {
+        icon.removeClass('fa-caret-up');
+        icon.addClass('fa-caret-down');
+    } else {
+        icon.removeClass('fa-caret-down');
+        icon.addClass('fa-caret-up');
+    }
+
+    $('.expandable').collapse('toggle');
+});
+
+$('#newClassToggle').click();
+</script>

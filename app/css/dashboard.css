@@ -7,6 +7,15 @@ body {
     padding-top: 50px;
 }
 
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+th {
+    border-bottom: 1px solid lightgray;
+}
 
 /*
  * Global add-ons
@@ -106,4 +115,7 @@ body {
 
 h2 a.edit i {
     font-size: 18px;
+}
+table.responsive {
+
 }
