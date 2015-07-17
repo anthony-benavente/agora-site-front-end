@@ -49,7 +49,7 @@
 	</thead>
 	<tbody>
 		<tr ng-repeat="c in classes | orderBy: 'courseCode'">
-			<td>{{c.program.shortCode}} {{c.courseCode}} - {{c.className}}</td>
+			<td><a href="#/dashboard/classes/{{c.classId}}">{{c.program.shortCode}} {{c.courseCode}} - {{c.className}}</a></td>
 			<td>{{c.semester}} {{c.year}}</td>
 		</tr>
 	</tbody>
