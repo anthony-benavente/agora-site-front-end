@@ -119,3 +119,7 @@ h2 a.edit i {
 table.responsive {
 
 }
+
+.inline {
+    display: inline-block;
+}

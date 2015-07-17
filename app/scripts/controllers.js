@@ -1,3 +1,4 @@
+/* jslint node: true */
 'use strict';
 
 var CLASSES_TAB = 2;
@@ -8,6 +9,7 @@ function setSelected(arr, selected) {
     }
 }
 
+/* jslint angular: true */
 angular.module('angularRestfulAuth').
 controller('SignOutCtrl', ['$scope', '$localStorage', 'Main', function($scope, $localStorage, Main) {
     $scope.logout = function() {
@@ -25,10 +27,10 @@ controller('HomeCtrl', ['$scope', '$localStorage', 'Main', function($scope, $loc
             var formData = {
                 username: $scope.username,
                 password: $scope.password
-            }
+            };
 
             Main.signin(formData, function(res) {
-                if (res.type == false) {
+                if (res.type === false) {
                     alert(res.data);
                 } else {
                     $localStorage.token = res.data.token;
@@ -50,7 +52,7 @@ controller('HomeCtrl', ['$scope', '$localStorage', 'Main', function($scope, $loc
 
             if ($scope.password === $scope.confirmPassword) {
                 Main.register(formData, function(res) {
-                    if (res.type == false) {
+                    if (res.type === false) {
                         alert(res.data);
                     } else {
                         $localStorage.token = res.data.token;
@@ -152,20 +154,44 @@ controller('DashboardCtrl', ['$scope', '$localStorage', 'Main', function($scope,
         window.location = '/#/signin';
     }
 }]).
-controller('DashboardClassCtrl', ['$scope', '$localStorage', 'Main', function($scope, $localStorage, Main) {
+controller('DashboardClassCtrl', ['$scope', '$localStorage', '$routeParams', 'Main', function($scope, $localStorage, $routeParams, Main) {
     function initScope() {
+        var data = {};
+
         $scope.currentUser = Main.getUserFromToken($localStorage.token);
         $scope.focus = {};
         $scope.pageContent = '/partials/dashboard/class.html';
-        Main.getClass($routeParams.classId, classId, $localStorage.token, function(data) {
+
+        Main.getPrograms($localStorage.token, function(data) {
+            $scope.programs = data.data;
+            Main.getClass($routeParams.classId, $localStorage.token, function(classData) {
+                $scope.class = classData.data;
+                $scope.class.program = $scope.programs.find(function(item) {
+                    return item.programId === $scope.class.programId;
+                });
+                Main.getAssignments(classData.classId, $localStorage.token, function(assignmentData) {
+                    $scope.assignments = assignmentData.data;
+                }, function() {
+                    $scope.assignments = [];
+                });
+            }, function() {
+                $scope.classes = [];
+            });
+        }, function() {
+            $scope.programs = [];
+        });
+
+        Main.getClass($routeParams.classId, $localStorage.token, function(data) {
             $scope.class = data.data;
         }, function(err) {
-            $scope.class = {}
+            $scope.class = {};
         });
+
+        // Makes the class tab item in the menu focused
+        $scope.focus[CLASSES_TAB] = true;
     }
-    
-    // Makes the class tab item in the menu focused
-    $scope.focus[CLASSES_TAB] = true;
+
+    initScope();
 }]).
 controller('DashboardClassesCtrl', ['$scope', '$localStorage', 'Main', function($scope, $localStorage, Main) {
     function initScope() {
@@ -184,16 +210,17 @@ controller('DashboardClassesCtrl', ['$scope', '$localStorage', 'Main', function(
             $scope.programs = data.data;
             Main.getClasses($localStorage.token, function(classData) {
                 $scope.classes = classData.data;
+                var comparisonFunc = function(item) {
+                    return item.programId === $scope.classes[i].programId;
+                };
                 for (var i = 0;  i < $scope.classes.length ;i++) {
-                    $scope.classes[i].program = $scope.programs.find(function(item) {
-                      return item.programId === $scope.classes[i].programId;
-                    });
+                    $scope.classes[i].program = $scope.programs.find(comparisonFunc);
                 }
             }, function() {
                 $scope.classes = [];
             });
         }, function() {
-            $scope.programs = []
+            $scope.programs = [];
         });
 
         // Makes the class tab item in the menu focused

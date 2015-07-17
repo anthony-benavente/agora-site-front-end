@@ -1,8 +1,10 @@
-<h2 id="classFullName">CS 150 - Introduction to Programming I <a class="edit" href="javascript:void(0);"><i class="fa fa-pencil"></i></a></h2>
+<h2 id="classFullName" class="inline">
+    {{class.program.shortCode}} {{class.courseCode}} - {{class.className}}
+</h2>
+<a class="edit" href="javascript:void(0);"><i class="fa fa-pencil"></i></a>
 <h3>Assignments</h3>
-<ul>
-    <li><a href="#/assignment/0">Vending Machine</a></li>
-    <li><a href="#/assignment/0">Snow Forecast</a></li>
-    <li><a href="#/assignment/0">The Olympics</a></li>
-    <li><a href="#/assignment/0">Checkers (Honors)</a></li>
+<ul id="assignmentList">
+    <li ng-repeat="a in assignments | orderBy: 'name'">
+        <a href="#/dashboard/assignments/{{a.assingmentId}}">{{a.name}}</a>
+    </li>
 </ul>
